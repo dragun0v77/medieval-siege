@@ -1,4 +1,4 @@
-package com.dungeonanddragons.world;
+package com.dungeonanddragons.game;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -140,19 +140,6 @@ final class Sprites {
             ".d.d..d.d...",
             ".k.k..k.k..."}, "");
 
-    private static final BufferedImage BANDIT = make(new String[]{
-            "...nnnnnn...",
-            "..nnnnnnnn..",
-            "..nsssssn...",
-            "..nskssksn..",
-            "..nsssssn...",
-            "..rrrrrrrr..",
-            ".nrrrrrrrrn.",
-            ".nrrrbbrrrn.",
-            "..rrrrrrrr..",
-            "..rrr..rrr..",
-            "..ddd..ddd..",
-            "..ddd..ddd.."}, "");
 
     static final BufferedImage TREE = make(new String[]{
             "....gggg....",
@@ -196,11 +183,111 @@ final class Sprites {
             "dllkkkkkklld",
             "dddddddddddd"}, "");
 
+
+
+
+    private static BufferedImage recolor(BufferedImage src, int from, int to) {
+        BufferedImage img = new BufferedImage(SIZE, SIZE, BufferedImage.TYPE_INT_ARGB);
+        for (int y = 0; y < SIZE; y++) {
+            for (int x = 0; x < SIZE; x++) {
+                int p = src.getRGB(x, y);
+                img.setRGB(x, y, (p & 0xFFFFFF) == from ? (0xFF000000 | to) : p);
+            }
+        }
+        return img;
+    }
+
+    private static final BufferedImage MILITIA = make(new String[]{
+            "..l.dddd....",
+            "..n.dllld...",
+            "..n.dkkkd...",
+            "..n..ddd....",
+            "..n.nnnnnn..",
+            "..nsnnyynns.",
+            "..n.nnnnnn..",
+            "..n.nnnnnn..",
+            "..n.nnddnn..",
+            "..n.nn..nn..",
+            "..n.dd..dd..",
+            "..n.kk..kk.."}, "");
+
+    private static final BufferedImage ARCHER = make(new String[]{
+            "...gggggg...",
+            "..gggggggg..",
+            "..gsskksg...",
+            "..gsssssg...",
+            "...gggggg...",
+            "..ngggggg...",
+            ".nwgggggg...",
+            "nw.ggnngg...",
+            ".nwgggggg...",
+            "..ngg..gg...",
+            "...nn..nn...",
+            "...kk..kk..."}, "");
+
+    private static final BufferedImage KNIGHT = recolor(HERO, 0x3a6fd0, 0xc0392b);
+    private static final BufferedImage PALADIN = recolor(HERO, 0x3a6fd0, 0xe6e6f0);
+
+    private static final BufferedImage TOWN = make(new String[]{
+            "r.d.d..d.d.r",
+            "dddddddddddd",
+            "dllldllldlld",
+            "dllldllldlld",
+            "dddddddddddd",
+            "dlllllllllld",
+            "dlllkkkkllld",
+            "dllkkkkkklld",
+            "dllkkkkkklld",
+            "dllkkkkkklld",
+            "dllkkkkkklld",
+            "dddddddddddd"}, "");
+
+    private static final BufferedImage GOLD_MINE = make(new String[]{
+            "............",
+            "....dddd....",
+            "...dddddd...",
+            "..dddlldddd.",
+            ".ddddddddddd",
+            ".ddkkkkkdyd.",
+            "dddkkkkkdddd",
+            "ddykkkkkdydd",
+            "dddkkkkkdddd",
+            "dddddddddddd",
+            "............",
+            "............"}, "");
+
+    private static final BufferedImage ORE_PIT = recolor(GOLD_MINE, 0xf2c230, 0xc8ccd8);
+    private static final BufferedImage SAWMILL = recolor(recolor(HOUSE, 0xc0392b, 0x8a5a2e), 0xd9c08a, 0xa8793f);
+
+    private static final BufferedImage WOOD_PILE = make(new String[]{
+            "............", "............", "............", "............", "............", "............",
+            "...nnnnnn...",
+            "..nkknkknn..",
+            ".nnnnnnnnnn.",
+            ".nkknkknkkn.",
+            ".nnnnnnnnnn.",
+            "............"}, "");
+
+    private static final BufferedImage ORE_PILE = make(new String[]{
+            "............", "............", "............", "............", "............", "............",
+            "....llll....",
+            "..lllllllll.",
+            ".llldlllldll",
+            ".lldddlldddl",
+            ".kkkkkkkkkk.",
+            "............"}, "");
+
+    private static final BufferedImage GOLD_PILE = make(new String[]{
+            "............", "............", "............", "............", "............", "............",
+            "....yyyy....",
+            "..yyyyoyyyy.",
+            ".yyoyyyyyoyy",
+            ".yyyyyyyyyy.",
+            ".kkkkkkkkkk.",
+            "............"}, "");
+
     static final BufferedImage CHEST = make(new String[]{
-            "............",
-            "............",
-            "............",
-            "............",
+            "............", "............", "............", "............",
             "..nnnnnnnn..",
             ".nnnnnnnnnn.",
             ".nyyyyyyyyn.",
@@ -210,43 +297,14 @@ final class Sprites {
             ".kkkkkkkkkk.",
             "............"}, "");
 
-    static final BufferedImage GRACE = make(new String[]{
-            ".....yy.....",
-            "....yyyy....",
-            "...yyyyyy...",
-            "...yyoyyy...",
-            "....yyoy....",
-            ".....yy.....",
-            "....wwww....",
-            "...wwwwww...",
-            "..llllllll..",
-            "..dddddddd..",
-            "............",
-            "............"}, "");
-
-    private static final String[] NPC = {
-            "....BBBB....",
-            "...BBBBBB...",
-            "..BBBBBBBB..",
-            "...ssssss...",
-            "...skssks...",
-            "...wwwwww...",
-            "..AAwwwwAA..",
-            ".AAAAAAAAAA.",
-            ".AAAAAAAAAA.",
-            ".AAAAAAAAAA.",
-            ".AAAAAAAAAA.",
-            "..nn....nn.."};
-
-    private static final BufferedImage ELDER = make(NPC, "A=8a4fc4,B=b4b8c4");
-    private static final BufferedImage MERCHANT = make(NPC, "A=4fa84a,B=f2c230");
-    private static final BufferedImage HEALER = make(NPC, "A=f0f0f0,B=c0392b");
-
-    static BufferedImage of(Mob.Kind k) {
-        return switch (k) {
-            case WOLF -> WOLF;
-            case BANDIT -> BANDIT;
+    static BufferedImage of(UnitType t) {
+        return switch (t) {
+            case MILITIA -> MILITIA;
+            case ARCHER -> ARCHER;
+            case KNIGHT -> KNIGHT;
+            case PALADIN -> PALADIN;
             case GOBLIN -> GOBLIN;
+            case WOLF -> WOLF;
             case SKELETON -> SKELETON;
             case ORC -> ORC;
             case TROLL -> TROLL;
@@ -254,14 +312,25 @@ final class Sprites {
         };
     }
 
-    static BufferedImage of(Prop.Kind k) {
-        return switch (k) {
+    /** Спрайт объекта карты (для отрядов — спрайт существа). */
+    static BufferedImage of(GameWorld.MapObject o) {
+        return switch (o.kind) {
+            case TOWN -> TOWN;
+            case GOLD_MINE -> GOLD_MINE;
+            case SAWMILL -> SAWMILL;
+            case ORE_PIT -> ORE_PIT;
+            case GOLD_PILE -> GOLD_PILE;
+            case WOOD_PILE -> WOOD_PILE;
+            case ORE_PILE -> ORE_PILE;
             case CHEST -> CHEST;
-            case GRACE -> GRACE;
-            case ELDER -> ELDER;
-            case MERCHANT -> MERCHANT;
-            case HEALER -> HEALER;
+            case STACK -> of(o.unit);
         };
+    }
+
+    /** Рисует спрайт, увеличивая без сглаживания; flip — отзеркалить по горизонтали. */
+    static void draw(java.awt.Graphics2D g, BufferedImage img, int x, int y, int size, boolean flip) {
+        if (flip) g.drawImage(img, x + size, y, -size, size, null);
+        else g.drawImage(img, x, y, size, size, null);
     }
 
     private Sprites() { }
