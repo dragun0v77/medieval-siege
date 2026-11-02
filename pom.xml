@@ -34,7 +34,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <mainClass>com.carmechanic.Main</mainClass>
+                    <mainClass>com.dungeonanddragons.GameWindow</mainClass>
                 </configuration>
             </plugin>
 
